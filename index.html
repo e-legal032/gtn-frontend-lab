@@ -3,23 +3,167 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GTN - Frontend Lab</title>
-    <!-- Carga síncrona del CSS -->
+    <title>GTN - Laboratorio 1.1</title>
+    <!-- Carga síncrona de estilos procesados por Vite -->
     <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center justify-center p-6">
+  <body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-8 font-sans antialiased">
     
-    <div class="max-w-md w-full bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-2xl text-center">
-      <span class="px-3 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-full border border-blue-500/20 uppercase tracking-wider">
-        Fase 1 · Módulo 1.1
-      </span>
-      <h1 class="text-2xl font-bold mt-4">🚀 Entorno Vite + Tailwind v4</h1>
-      <p class="text-slate-400 text-sm mt-2">
-        Servidor de desarrollo activo desde GitHub Codespaces.
-      </p>
+    <div class="max-w-6xl mx-auto space-y-8">
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 1: Tarjeta de Presentación / Hero   -->
+      <!-- ========================================== -->
+      <header class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center md:text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-semibold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+            Gestoría Técnica Notarial · Fase 1
+          </div>
+          <h1 class="text-3xl font-extrabold text-white tracking-tight">
+            Entorno Unificado Vite + Tailwind v4
+          </h1>
+          <p class="text-slate-400 text-sm max-w-xl">
+            Sistema de gestión de archivos, normalización de documentos y soporte técnico para escribanías.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3 bg-slate-900/60 p-4 rounded-xl border border-slate-700/50">
+          <div class="w-10 h-10 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold">
+            GTN
+          </div>
+          <div class="text-xs">
+            <p class="font-semibold text-white">Estado del Servidor</p>
+            <p class="text-emerald-400 font-mono">HMR Activo (Vite)</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- LAYOUT PRINCIPAL A DOS COLUMNAS -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- ========================================== -->
+        <!-- BLOQUE 2: Formulario de Carga Notarial    -->
+        <!-- ========================================== -->
+        <section class="lg:col-span-5 bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl space-y-6">
+          <div>
+            <h2 class="text-xl font-bold text-white">Ingreso de Trámite</h2>
+            <p class="text-xs text-slate-400 mt-1">Cargue los datos del protocolo para su procesamiento técnico.</p>
+          </div>
+
+          <form onsubmit="event.preventDefault();" class="space-y-4">
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Nº de Protocolo / Escritura</label>
+              <input 
+                type="text" 
+                placeholder="Ej: 2026-EXP-089" 
+                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Escribanía / Cliente</label>
+              <input 
+                type="text" 
+                placeholder="Escribanía Morón Centro" 
+                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Tipo de Operación</label>
+              <select class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors">
+                <option value="1">Digitalización y OCR</option>
+                <option value="2">Resguardo / Backup Seguro</option>
+                <option value="3">Validación VUCE / Certificación</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Observaciones Técnicas</label>
+              <textarea 
+                rows="3" 
+                placeholder="Detalle de foliado o estado de legibilidad..."
+                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+              ></textarea>
+            </div>
+
+            <button 
+              type="submit" 
+              class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 px-4 rounded-lg text-sm transition-colors shadow-lg shadow-blue-600/20 active:scale-[0.99]"
+            >
+              Registrar Trámite
+            </button>
+          </form>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- BLOQUE 3: Dashboard de Métricas y Estado   -->
+        <!-- ========================================== -->
+        <section class="lg:col-span-7 space-y-6">
+          
+          <!-- Tarjetas de Métricas Rápidas -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-slate-800 border border-slate-700 p-4 rounded-xl shadow-lg">
+              <span class="text-xs text-slate-400 font-medium">Procesados Hoy</span>
+              <p class="text-2xl font-bold text-white mt-1">24</p>
+              <span class="text-[10px] text-emerald-400 font-medium">↑ 12% vs ayer</span>
+            </div>
+
+            <div class="bg-slate-800 border border-slate-700 p-4 rounded-xl shadow-lg">
+              <span class="text-xs text-slate-400 font-medium">En Cola OCR</span>
+              <p class="text-2xl font-bold text-white mt-1">8</p>
+              <span class="text-[10px] text-amber-400 font-medium">Pendientes de firma</span>
+            </div>
+
+            <div class="bg-slate-800 border border-slate-700 p-4 rounded-xl shadow-lg">
+              <span class="text-xs text-slate-400 font-medium">Resguardo Backup</span>
+              <p class="text-2xl font-bold text-white mt-1">100%</p>
+              <span class="text-[10px] text-blue-400 font-medium">Sincronizado</span>
+            </div>
+          </div>
+
+          <!-- Tabla de Últimos Registros -->
+          <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl space-y-4">
+            <h3 class="text-lg font-bold text-white">Últimos Documentos Procesados</h3>
+            
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-900/50 uppercase text-slate-400 font-semibold border-b border-slate-700">
+                  <tr>
+                    <th class="p-3">Protocolo</th>
+                    <th class="p-3">Servicio</th>
+                    <th class="p-3">Estado</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-700/50">
+                  <tr>
+                    <td class="p-3 font-mono font-medium text-white">2026-EXP-088</td>
+                    <td class="p-3">Digitalización + OCR</td>
+                    <td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">Completado</span></td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-mono font-medium text-white">2026-EXP-087</td>
+                    <td class="p-3">Validación VUCE</td>
+                    <td class="p-3"><span class="px-2 py-0.5 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">En Proceso</span></td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-mono font-medium text-white">2026-EXP-086</td>
+                    <td class="p-3">Resguardo Backup</td>
+                    <td class="p-3"><span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">Completado</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
     </div>
 
-    <!-- Script JS limpio -->
+    <!-- Script de entrada principal -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
