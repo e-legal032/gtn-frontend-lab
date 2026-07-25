@@ -1,11 +1,37 @@
+/* 1. La fuente externa SIEMPRE debe ser la primera línea del archivo CSS */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+/* 2. Importación del motor de Tailwind v4 */
 @import "tailwindcss";
 
+:root {
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   DESIGN SYSTEM GTN - CONFIGURACIÓN CENTRALIZADA DE TOKENS DE DISEÑO
+   ========================================================================== */
 @theme {
-  --color-slate-900: #0f172a;
-  --color-slate-800: #1e293b;
-  --color-slate-700: #334155;
-  --color-slate-400: #94a3b8;
-  --color-slate-100: #f1f5f9;
-  --color-blue-500: #3b82f6;
-  --color-blue-400: #60a5fa;
+  /* 1. TIPOGRAFÍA CORPORATIVA */
+  --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
+
+  /* 2. PALETA DE COLORES INSTITUCIONALES (Hexadecimales de alta compatibilidad) */
+  /* Colores de Fondo / Superficie */
+  --color-gtn-dark: #0f172a;       /* Slate 900 - Fondo principal */
+  --color-gtn-surface: #1e293b;    /* Slate 800 - Fondo de tarjetas y paneles */
+  --color-gtn-border: #334155;     /* Slate 700 - Bordes de contenedores */
+  --color-gtn-text: #cbd5e1;   /* texto general - gris plata */
+  
+  /* Colores de Marca y Acción */
+  --color-gtn-brand: #2563eb;      /* Azul Cobalto Institucional */  
+  --color-gtn-brand-hover: #1d4ed8;/* Hover más oscuro */
+  --color-gtn-accent: #38bdf8;     /* Sky 400 para badges */
+
+  /* Colores Semánticos de Estado */
+  --color-gtn-success: #10b981;    /* Emerald 500 - Trámite completado */
+  --color-gtn-warning: #f59e0b;    /* Amber 500 - En proceso / pendiente */
+  --color-gtn-error: #ef4444;      /* Red 500 - Error o rechazado */
+
+  /* 3. BREAKPOINTS PERSONALIZADOS */
+  --breakpoint-kiosk: 1400px;      /* Pantallas anchas de gestión notarial */
 }
