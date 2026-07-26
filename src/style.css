@@ -4,34 +4,112 @@
 /* 2. Importación del motor de Tailwind v4 */
 @import "tailwindcss";
 
+/* ==========================================================================
+   EVALUACIÓN DE MODO OSCURO / CLARO (Variables de Superficie y Componentes)
+   ========================================================================== */
+
+/* Valores predeterminados (Modo Claro) */
 :root {
-  color-scheme: dark;
+  --color-gtn-bg: #f8fafc;        /* Slate 50 */
+  --color-gtn-surface: #ffffff;   /* Blanco */
+  --color-gtn-border: #e2e8f0;    /* Slate 200 */
+  --color-gtn-text: #475569;      /* Slate 600 */
+  --color-gtn-heading: #0f172a;   /* Slate 900 */
+
+  /* Tokens del Botón Primario (Modo Claro) */
+  --btn-bg: #0f172a;                       /* Fondo Slate 900 para mantener la estética */
+  --btn-bg-hover: #1e293b;                 /* Slate 800 en hover */
+  --btn-text: #38bdf8;                     /* Texto Sky 400 (Cian tecnológico) */
+  --btn-text-hover: #ffffff;               /* Texto blanco en hover */
+  --btn-border: rgba(56, 189, 248, 0.4);   /* Borde cian translúcido */
+  --btn-border-hover: #38bdf8;             /* Borde cian pleno */
+  --btn-shadow-hover: rgba(56, 189, 248, 0.2);
+}
+
+/* Valores para Modo Oscuro (se activan con <html class="dark">) */
+.dark {
+  --color-gtn-bg: #0f172a;        /* Slate 900 */
+  --color-gtn-surface: #1e293b;   /* Slate 800 */
+  --color-gtn-border: #334155;    /* Slate 700 */
+  --color-gtn-text: #cbd5e1;      /* Slate 300 */
+  --color-gtn-heading: #ffffff;   /* Blanco */
+
+  /* Tokens del Botón Primario (Modo Oscuro) */
+  --btn-bg: rgba(15, 23, 42, 0.9);         /* Slate 900 translúcido */
+  --btn-bg-hover: #1e293b;                 /* Slate 800 en hover */
+  --btn-text: #38bdf8;                     /* Texto Sky 400 */
+  --btn-text-hover: #ffffff;               /* Texto blanco en hover */
+  --btn-border: rgba(56, 189, 248, 0.4);   /* Borde cian translúcido */
+  --btn-border-hover: #38bdf8;             /* Borde cian pleno */
+  --btn-shadow-hover: rgba(56, 189, 248, 0.25);
 }
 
 /* ==========================================================================
-   DESIGN SYSTEM GTN - CONFIGURACIÓN CENTRALIZADA DE TOKENS DE DISEÑO
+   CONFIGURACIÓN DE TOKENS EN TAILWIND V4
    ========================================================================== */
 @theme {
-  /* 1. TIPOGRAFÍA CORPORATIVA */
   --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
 
-  /* 2. PALETA DE COLORES INSTITUCIONALES (Hexadecimales de alta compatibilidad) */
-  /* Colores de Fondo / Superficie */
-  --color-gtn-dark: #0f172a;       /* Slate 900 - Fondo principal */
-  --color-gtn-surface: #1e293b;    /* Slate 800 - Fondo de tarjetas y paneles */
-  --color-gtn-border: #334155;     /* Slate 700 - Bordes de contenedores */
-  --color-gtn-text: #cbd5e1;   /* texto general - gris plata */
-  
-  /* Colores de Marca y Acción */
-  --color-gtn-brand: #2563eb;      /* Azul Cobalto Institucional */  
-  --color-gtn-brand-hover: #1d4ed8;/* Hover más oscuro */
-  --color-gtn-accent: #38bdf8;     /* Sky 400 para badges */
+  /* Mapeo de tokens a las variables CSS dinámicas de modo oscuro/claro */
+  --color-gtn-dark: var(--color-gtn-bg);
+  --color-gtn-surface: var(--color-gtn-surface);
+  --color-gtn-border: var(--color-gtn-border);
+  --color-gtn-text: var(--color-gtn-text);
+  --color-gtn-heading: var(--color-gtn-heading);
 
-  /* Colores Semánticos de Estado */
-  --color-gtn-success: #10b981;    /* Emerald 500 - Trámite completado */
-  --color-gtn-warning: #f59e0b;    /* Amber 500 - En proceso / pendiente */
-  --color-gtn-error: #ef4444;      /* Red 500 - Error o rechazado */
+  /* Marca y Acciones */
+  --color-gtn-brand: #2563eb;       /* Azul Cobalto Institucional */
+  --color-gtn-brand-hover: #1d4ed8;
+  --color-gtn-accent: #0284c7;      /* Sky 600 en claro */
 
-  /* 3. BREAKPOINTS PERSONALIZADOS */
-  --breakpoint-kiosk: 1400px;      /* Pantallas anchas de gestión notarial */
+  /* Estados */
+  --color-gtn-success: #10b981;
+  --color-gtn-warning: #f59e0b;
+  --color-gtn-error: #ef4444;
+
+  --breakpoint-kiosk: 1400px;
+}
+
+/* ==========================================================================
+   ABSTRACCIÓN DE COMPONENTES REPETITIVOS
+   ========================================================================== */
+@layer components {
+  /* Abstracción para los inputs */
+  .gtn-input {
+    @apply w-full bg-gtn-dark border border-gtn-border rounded-lg px-3 py-2 text-sm text-gtn-heading placeholder-slate-400 focus:outline-none focus:border-gtn-brand transition-colors;
+  }
+
+  /* Botón primario: Estructura desacoplada guiada por Tokens CSS */
+  .btn-primary {
+    width: 100%;
+    font-weight: 600;
+    padding: 0.625rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    /* Propiedades vinculadas a las variables por tema */
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    border: 1px solid var(--btn-border);
+  }
+
+  /* Estado HOVER: Mismo comportamiento agnóstico al tema */
+  .btn-primary:hover {
+    background-color: var(--btn-bg-hover);
+    color: var(--btn-text-hover);
+    border-color: var(--btn-border-hover);
+    box-shadow: 0 10px 15px -3px var(--btn-shadow-hover);
+  }
+
+  /* Estado ACTIVE: Respuesta táctil/clic */
+  .btn-primary:active {
+    transform: scale(0.99);
+  }
+
+  /* Abstracción para tarjetas */
+  .gtn-card {
+    @apply bg-gtn-surface border border-gtn-border p-4 rounded-xl shadow-lg transition-colors;
+  }
 }
